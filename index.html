@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Student Feedback Registration Form – Share your academic feedback easily and securely.">
+    <title>Student Feedback Registration Form</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- ========  INTERNAL CSS (Sub-Task 2 requirement) ======== -->
+    <style>
+        /* Internal CSS – page-level animation keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes toastIn {
+            from { opacity: 0; transform: translateY(-20px) scale(0.96); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .form-card {
+            animation: fadeIn 0.5s ease-out;
+        }
+        .error-msg {
+            animation: slideDown 0.2s ease-out;
+        }
+        .toast {
+            animation: toastIn 0.35s ease-out;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==================  FORM CARD  ================== -->
+    <main class="form-card" id="formCard">
+        <header class="form-header">
+            <div class="logo-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                    <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                </svg>
+            </div>
+            <h1>Student Feedback <span class="accent-underline">Registration</span></h1>
+            <p class="subtitle">Your feedback helps us improve the academic experience.</p>
+        </header>
+
+        <form id="feedbackForm" novalidate>
+            <!-- Student Name -->
+            <div class="form-group" id="nameGroup">
+                <label for="studentName">Student Name <span class="req">*</span></label>
+                <div class="input-wrap">
+                    <span class="input-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </span>
+                    <input type="text" id="studentName" name="studentName" placeholder="e.g. Aarav Sharma"
+                           autocomplete="name" required>
+                </div>
+                <span class="error-msg" id="nameError"></span>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group" id="emailGroup">
+                <label for="emailId">Email ID <span class="req">*</span></label>
+                <div class="input-wrap">
+                    <span class="input-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="20" height="16" x="2" y="4" rx="2"/>
+                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                        </svg>
+                    </span>
+                    <input type="email" id="emailId" name="emailId" placeholder="e.g. aarav@university.ac.in"
+                           autocomplete="email" required>
+                </div>
+                <span class="error-msg" id="emailError"></span>
+            </div>
+
+            <!-- Mobile Number -->
+            <div class="form-group" id="mobileGroup">
+                <label for="mobileNumber">Mobile Number <span class="req">*</span></label>
+                <div class="input-wrap">
+                    <span class="input-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="14" height="20" x="5" y="2" rx="2" ry="2"/>
+                            <path d="M12 18h.01"/>
+                        </svg>
+                    </span>
+                    <input type="tel" id="mobileNumber" name="mobileNumber" placeholder="e.g. 9876543210"
+                           autocomplete="tel" maxlength="10" required>
+                </div>
+                <span class="error-msg" id="mobileError"></span>
+            </div>
+
+            <!-- Department (dropdown) -->
+            <div class="form-group" id="deptGroup">
+                <label for="department">Department <span class="req">*</span></label>
+                <div class="input-wrap select-wrap">
+                    <span class="input-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+                        </svg>
+                    </span>
+                    <select id="department" name="department" required>
+                        <option value="" disabled selected>Select your department</option>
+                        <option value="CSE">Computer Science &amp; Engineering</option>
+                        <option value="IT">Information Technology</option>
+                        <option value="ECE">Electronics &amp; Communication</option>
+                        <option value="EEE">Electrical &amp; Electronics</option>
+                        <option value="ME">Mechanical Engineering</option>
+                        <option value="CE">Civil Engineering</option>
+                        <option value="AIDS">AI &amp; Data Science</option>
+                        <option value="MBA">Master of Business Admin</option>
+                    </select>
+                </div>
+                <span class="error-msg" id="deptError"></span>
+            </div>
+
+            <!-- Gender (radio) -->
+            <div class="form-group" id="genderGroup">
+                <label>Gender <span class="req">*</span></label>
+                <div class="radio-group">
+                    <label class="radio-label" for="genderMale">
+                        <input type="radio" id="genderMale" name="gender" value="Male">
+                        <span class="radio-custom"></span>
+                        Male
+                    </label>
+                    <label class="radio-label" for="genderFemale">
+                        <input type="radio" id="genderFemale" name="gender" value="Female">
+                        <span class="radio-custom"></span>
+                        Female
+                    </label>
+                    <label class="radio-label" for="genderOther">
+                        <input type="radio" id="genderOther" name="gender" value="Other">
+                        <span class="radio-custom"></span>
+                        Other
+                    </label>
+                </div>
+                <span class="error-msg" id="genderError"></span>
+            </div>
+
+            <!-- Feedback Comments -->
+            <div class="form-group" id="feedbackGroup">
+                <label for="feedbackComments">Feedback Comments <span class="req">*</span></label>
+                <div class="input-wrap textarea-wrap">
+                    <textarea id="feedbackComments" name="feedbackComments" rows="4"
+                              placeholder="Share your thoughts (minimum 10 words)…" required></textarea>
+                </div>
+                <div class="textarea-meta">
+                    <span class="error-msg" id="feedbackError"></span>
+                    <span class="word-count" id="wordCount">0 words</span>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="btn-group">
+                <button type="submit" class="btn btn-submit" id="submitBtn">
+                    <span class="btn-text">Submit Feedback</span>
+                    <span class="btn-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </button>
+                <button type="reset" class="btn btn-reset" id="resetBtn">
+                    <span class="btn-text">Reset</span>
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <!-- Success Toast -->
+    <div class="toast" id="successToast" role="alert" aria-live="assertive" hidden>
+        <div class="toast-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6 9 17l-5-5"/>
+            </svg>
+        </div>
+        <div class="toast-body">
+            <strong>Thank you!</strong>
+            <p>Your feedback has been submitted successfully.</p>
+        </div>
+    </div>
+
+    <!-- JavaScript Validation (External) -->
+    <script src="js/validation.js"></script>
+</body>
+</html>
